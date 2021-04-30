@@ -1,0 +1,52 @@
+# scalar DateTime
+
+# enum PhotoCategory {
+#   SELFIE
+#   PORTRAIT
+#   ACTION
+#   LANDSCAPE
+#   GRAPHIC
+# }
+
+type Photo {
+  # id: ID!
+  # url: String!
+  name: String!
+  description: String
+  # category: PhotoCategory!
+  # postedBy: User!
+  # taggedUsers: [User!]!
+  # created: DateTime!
+}
+
+input PostPhotoInput {
+  name: String!
+  description: String
+  # category: PhotoCategory=PORTRAIT
+}
+
+type User {
+  githubLogin: ID!
+  name: String
+  avatar: String
+  # postedPhotos: [Photo!]!
+  # inPhotos: [Photo!]!
+}
+
+type Query {
+  me: User!
+  totalUsers: Int!,
+  allUsers: [User!]!
+  totalPhotos: Int!
+  allPhotos: [Photo!]!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type Mutation {
+  githubAuth(code: String!): AuthPayload!
+  postPhoto(input: PostPhotoInput!): Photo!
+}
